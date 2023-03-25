@@ -18,14 +18,11 @@ public class RestaTarea {
         while (m > 0) {
             nSorted = sortNumber(Integer.toString(nInt));
             m = nInt - nSorted;
-
-            if (m > 0)
-                count++;
-
+            count++;
             nInt = m;
         }
 
-        pw.println(count + 1);
+        pw.println(count);
 
         pw.close();
     }
