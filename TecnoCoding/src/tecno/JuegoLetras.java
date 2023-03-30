@@ -1,38 +1,33 @@
 import java.io.*;
 import java.util.*;
 
-public class FibonacciTec {
+public class JuegoLetras {
   public static void main(String[] args) throws Exception {
     PrintWriter pw = new PrintWriter(System.out);
     FastScanner sc = new FastScanner();
     
-    long n = sc.nextLong();
-    long term = 0;
-    long count = 0;
-    
-    StringBuilder response = new StringBuilder();
+    String str = sc.nextLine();
+    int ans = 0;
     
     // solution code ->
-    for (long i = n; i >= 1; i--) {
-      if (fib(i) > n) continue;
-      
-      if (term + fib(i) <= n) {
-        response.append(i).append(" ");
-        term += fib(i);
-        count++;
-      }
+    char[] chs = str.toCharArray();
+    
+    for (char c :
+        chs) {
+      if (c == 'A' || c == 'Q' || c == 'Z') ans += 1;
+      else if (c == 'W' || c == 'S' || c == 'X') ans += 2;
+      else if (c == 'E' || c == 'D' || c == 'C') ans += 3;
+      else if (c == 'R' || c == 'F' || c == 'V') ans += 4;
+      else if (c == 'T' || c == 'G' || c == 'B') ans += 5;
+      else if (c == 'Y' || c == 'H' || c == 'N') ans += 6;
+      else if (c == 'U' || c == 'J' || c == 'M') ans += 7;
+      else if (c == 'I' || c == 'K') ans += 8;
+      else if (c == 'O' || c == 'L') ans += 9;
     }
     
-    pw.println(count);
-    pw.println(response);
-    pw.close();
-  }
-  
-  public static long fib(long n) {
-    if (n <= 1) return 1;
-    if (n == 2) return 2;
+    pw.println(ans);
     
-    return fib(n - 1) + fib(n - 2);
+    pw.close();
   }
   
   static class FastScanner {

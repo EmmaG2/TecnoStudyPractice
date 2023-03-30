@@ -1,35 +1,54 @@
 import java.io.*;
 import java.util.*;
 
-public class JuegoLetras {
+public class FibonacciTec {
   public static void main(String[] args) throws Exception {
     PrintWriter pw = new PrintWriter(System.out);
     FastScanner sc = new FastScanner();
-    
-    String str = sc.nextLine();
-    int ans = 0;
-    
+
+    fibArray[0] = 1;
+    fibArray[1] = 2;
+
+    long n = sc.nextLong();
+    long term = 0;
+    long count = 0;
+
+    StringBuilder response = new StringBuilder();
+
     // solution code ->
-    char[] chs = str.toCharArray();
-    
-    for (char c :
-        chs) {
-      if (c == 'A' || c == 'Q' || c == 'Z') ans += 1;
-      else if (c == 'E' || c == 'D' || c == 'C') ans += 3;
-      else if (c == 'W' || c == 'S' || c == 'X') ans += 2;
-      else if (c == 'R' || c == 'F' || c == 'V') ans += 4;
-      else if (c == 'T' || c == 'G' || c == 'B') ans += 5;
-      else if (c == 'Y' || c == 'H' || c == 'N') ans += 6;
-      else if (c == 'U' || c == 'J' || c == 'M') ans += 7;
-      else if (c == 'I' || c == 'K') ans += 8;
-      else if (c == 'O' || c == 'L') ans += 9;
+    for (long i = n; i >= 1; i--) {
+      if (fibonacci(i) > n)
+        continue;
+
+      if (term + fibonacci(i) <= n) {
+        response.append(i).append(" ");
+        term += fibonacci(i);
+        count++;
+      }
     }
-    
-    pw.print(ans);
-    
+
+    System.out.println(count);
+    System.out.println(response);
     pw.close();
   }
-  
+
+  public static long fibArray[] = new long[10001];
+
+  public static long fibonacci(long n) {
+    long fibValue = 0;
+    if (n == 1)
+      return 1;
+    if (n == 2)
+      return 2;
+    if (fibArray[(int) n] != 0)
+      return fibArray[(int) n];
+    else {
+      fibValue = fibonacci(n - 1) + fibonacci(n - 2);
+      fibArray[(int) n] = fibValue;
+      return fibValue;
+    }
+  }
+
   static class FastScanner {
     private final int BS = 1 << 16;
     private final char NC = (char) 0;
@@ -38,11 +57,11 @@ public class JuegoLetras {
     private char c = NC;
     private double cnt = 1;
     private BufferedInputStream in;
-    
+
     public FastScanner() {
       in = new BufferedInputStream(System.in, BS);
     }
-    
+
     public FastScanner(String s) {
       try {
         in = new BufferedInputStream(new FileInputStream(new File(s)), BS);
@@ -50,7 +69,7 @@ public class JuegoLetras {
         in = new BufferedInputStream(System.in, BS);
       }
     }
-    
+
     private char getChar() {
       while (bId == size) {
         try {
@@ -58,16 +77,17 @@ public class JuegoLetras {
         } catch (Exception e) {
           return NC;
         }
-        if (size == -1) return NC;
+        if (size == -1)
+          return NC;
         bId = 0;
       }
       return (char) buf[bId++];
     }
-    
+
     public int nextInt() {
       return (int) nextLong();
     }
-    
+
     public int[] nextInts(int N) {
       int[] res = new int[N];
       for (int i = 0; i < N; i++) {
@@ -75,7 +95,7 @@ public class JuegoLetras {
       }
       return res;
     }
-    
+
     public long[] nextLongs(int N) {
       long[] res = new long[N];
       for (int i = 0; i < N; i++) {
@@ -83,13 +103,15 @@ public class JuegoLetras {
       }
       return res;
     }
-    
+
     public long nextLong() {
       cnt = 1;
       boolean neg = false;
-      if (c == NC) c = getChar();
+      if (c == NC)
+        c = getChar();
       for (; (c < '0' || c > '9'); c = getChar()) {
-        if (c == '-') neg = true;
+        if (c == '-')
+          neg = true;
       }
       long res = 0;
       for (; c >= '0' && c <= '9'; c = getChar()) {
@@ -98,12 +120,12 @@ public class JuegoLetras {
       }
       return neg ? -res : res;
     }
-    
+
     public double nextDouble() {
       double cur = nextLong();
       return c != '.' ? cur : cur + nextLong() / cnt;
     }
-    
+
     public double[] nextDoubles(int N) {
       double[] res = new double[N];
       for (int i = 0; i < N; i++) {
@@ -111,44 +133,50 @@ public class JuegoLetras {
       }
       return res;
     }
-    
+
     public String next() {
       StringBuilder res = new StringBuilder();
-      while (c <= 32) c = getChar();
+      while (c <= 32)
+        c = getChar();
       while (c > 32) {
         res.append(c);
         c = getChar();
       }
       return res.toString();
     }
-    
+
     public String nextLine() {
       StringBuilder res = new StringBuilder();
-      while (c <= 32) c = getChar();
+      while (c <= 32)
+        c = getChar();
       while (c != '\n') {
         res.append(c);
         c = getChar();
       }
       return res.toString();
     }
-    
+
     public boolean hasNext() {
-      if (c > 32) return true;
+      if (c > 32)
+        return true;
       while (true) {
         c = getChar();
-        if (c == NC) return false;
-        else if (c > 32) return true;
+        if (c == NC)
+          return false;
+        else if (c > 32)
+          return true;
       }
     }
   }
-  
+
   public static int[] sort(int[] arr) {
     ArrayList<Integer> ls = new ArrayList<>();
     for (int x : arr)
       ls.add(x);
     Collections.sort(ls);
-    for (int i = 0; i < arr.length; i++) arr[i] = ls.get(i);
-    
+    for (int i = 0; i < arr.length; i++)
+      arr[i] = ls.get(i);
+
     return arr;
   }
 }

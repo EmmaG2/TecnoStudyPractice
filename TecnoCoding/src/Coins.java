@@ -7,9 +7,7 @@ public class Coins {
     PrintWriter pw = new PrintWriter(System.out);
     FastScanner sc = new FastScanner();
     
-    System.out.println(7 % 3 != 0);
-    
-    /* // solution code ->
+    // solution code ->
     while (n-- > 0) {
       long a = sc.nextLong();
       long b = sc.nextLong();
@@ -17,7 +15,7 @@ public class Coins {
       if ((2 * a - b) >= 0 && (2 * a - b) % 3 == 0 && (2 * b - a) % 3 == 0 && (2 * b - a) >= 0) {
         pw.println("YES");
       } else pw.println("NO");
-    } */
+    } 
     
     
     pw.close();
