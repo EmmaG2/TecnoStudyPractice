@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class FibonacciTec {
+  public static int mod = (int) 10e9 + 7;
+
   public static void main(String[] args) throws Exception {
     PrintWriter pw = new PrintWriter(System.out);
     FastScanner sc = new FastScanner();
@@ -17,6 +19,8 @@ public class FibonacciTec {
 
     // solution code ->
     for (long i = n; i >= 1; i--) {
+
+      i = i % mod;
       if (fibonacci(i) > n)
         continue;
 
@@ -27,8 +31,8 @@ public class FibonacciTec {
       }
     }
 
-    System.out.println(count);
-    System.out.println(response);
+    pw.println(count);
+    pw.println(response);
     pw.close();
   }
 
@@ -41,11 +45,11 @@ public class FibonacciTec {
     if (n == 2)
       return 2;
     if (fibArray[(int) n] != 0)
-      return fibArray[(int) n];
+      return fibArray[(int) n] % mod;
     else {
-      fibValue = fibonacci(n - 1) + fibonacci(n - 2);
+      fibValue = (fibonacci(n - 1) + fibonacci(n - 2)) % mod;
       fibArray[(int) n] = fibValue;
-      return fibValue;
+      return fibValue % mod;
     }
   }
 
