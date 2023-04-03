@@ -32,11 +32,8 @@ public class AdnMarciano {
         }
 
         for (int i = 0; i < sc1.length; i++) {
-            if (sc1[i] != sc2[i]) mutations++;
+            if (sc1[i] != sc2[i]) return -1;
         }
-
-        if (mutations >= n) return -1;
-
 
         return mutations;
     }
