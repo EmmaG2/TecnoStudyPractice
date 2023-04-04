@@ -9,35 +9,60 @@ public class Besos {
         PrintWriter pw = new PrintWriter(System.out);
         FastScanner sc = new FastScanner();
 
+        StringBuilder response = new StringBuilder();
+
+        StringBuilder trash = new StringBuilder();
         String n = sc.nextLine();
 
-        int count = 0;
-        StringBuilder response = new StringBuilder();
         StringBuilder numbers = new StringBuilder();
-        int number;
 
-        char[] nchar = n.toCharArray();
+        LinkedList<Integer> numbersList = new LinkedList<>();
+
+        int count = 0;
+
+        boolean flag = true;
 
         for (char c :
-                nchar) {
-            if (c == '0') response.append(c);
-            else numbers.append(Character.getNumericValue(c));
+                n.toCharArray()) {
+            if (c == '0' && flag) trash.append(c);
+            else {
+                flag = false;
+                int val = Character.getNumericValue(c);
+                numbers.append(val);
+            }
         }
 
-        number = Integer.parseInt(numbers.toString());
-        int sumNumber = getNumsSum(numbers.toString());
+        int number = Integer.parseInt(numbers.toString());
+        int numberSum = getNumsSum(numbers.toString());
 
-        while (sumNumber < 21) {
+        while (numberSum < 21) {
             number++;
             count++;
-            sumNumber = getNumsSum(String.valueOf(number));
+
+            numberSum = getNumsSum(String.valueOf(number));
         }
 
-        response.append(number);
+        fillList(numbersList, number);
+
+        while (numbersList.size() < n.length()) numbersList.addFirst(0);
+
+        for (int i = 0; i < numbersList.size(); i++) {
+            response.append(numbersList.get(i));
+        }
 
         pw.println(count + " " + response);
-
         pw.close();
+    }
+
+    private static void fillList(LinkedList<Integer> list, int val) {
+        StringBuilder temp = new StringBuilder();
+        temp.append(val);
+
+        for (char c :
+                temp.toString().toCharArray()) {
+            int cInt = Character.getNumericValue(c);
+            list.addLast(cInt);
+        }
     }
 
     private static int getNumsSum(String n) {
@@ -57,6 +82,10 @@ public class Besos {
         }
 
         return result;
+    }
+
+    private static int getNumSum() {
+        return 0;
     }
 
     static class FastScanner {
@@ -181,5 +210,3 @@ public class Besos {
         return arr;
     }
 }
-
-// EmmaG2
