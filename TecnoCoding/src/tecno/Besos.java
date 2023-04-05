@@ -2,55 +2,40 @@ package tecno;
 
 import java.io.*;
 import java.util.*;
-import java.util.*;
 
 public class Besos {
+
+
     public static void main(String[] args) throws Exception {
         PrintWriter pw = new PrintWriter(System.out);
-        FastScanner sc = new FastScanner();
+        Scanner sc = new Scanner(System.in);
 
+        int n = sc.nextInt();
+        int totalSum;
+        int people = 0;
+        LinkedList<Integer> listNumbers = new LinkedList<>();
         StringBuilder response = new StringBuilder();
 
-        StringBuilder trash = new StringBuilder();
-        String n = sc.nextLine();
+        totalSum = getNumsSum(String.valueOf(n));
+        while (totalSum != 21) {
+            n++;
+            totalSum = getNumsSum(String.valueOf(n));
+            people++;
 
-        StringBuilder numbers = new StringBuilder();
-
-        LinkedList<Integer> numbersList = new LinkedList<>();
-
-        int count = 0;
-
-        boolean flag = true;
-
-        for (char c :
-                n.toCharArray()) {
-            if (c == '0' && flag) trash.append(c);
-            else {
-                flag = false;
-                int val = Character.getNumericValue(c);
-                numbers.append(val);
+            if (totalSum >= 63) {
+                n = 0;
             }
+
         }
 
-        int number = Integer.parseInt(numbers.toString());
-        int numberSum = getNumsSum(numbers.toString());
+        fillList(listNumbers, n);
 
-        while (numberSum < 21) {
-            number++;
-            count++;
-
-            numberSum = getNumsSum(String.valueOf(number));
+        for (Integer listNumber : listNumbers) {
+            response.append(listNumber);
         }
 
-        fillList(numbersList, number);
+        pw.println(people + " " + response);
 
-        while (numbersList.size() < n.length()) numbersList.addFirst(0);
-
-        for (int i = 0; i < numbersList.size(); i++) {
-            response.append(numbersList.get(i));
-        }
-
-        pw.println(count + " " + response);
         pw.close();
     }
 
@@ -58,10 +43,13 @@ public class Besos {
         StringBuilder temp = new StringBuilder();
         temp.append(val);
 
-        for (char c :
-                temp.toString().toCharArray()) {
+        for (char c : temp.toString().toCharArray()) {
             int cInt = Character.getNumericValue(c);
             list.addLast(cInt);
+        }
+
+        while (list.size() < 7) {
+            list.addFirst(0);
         }
     }
 
@@ -76,16 +64,11 @@ public class Besos {
             nInts[i] = z;
         }
 
-        for (int m :
-                nInts) {
+        for (int m : nInts) {
             result += m;
         }
 
         return result;
-    }
-
-    private static int getNumSum() {
-        return 0;
     }
 
     static class FastScanner {
