@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class Besos {
-
-
     public static void main(String[] args) throws Exception {
         PrintWriter pw = new PrintWriter(System.out);
         Scanner sc = new Scanner(System.in);
@@ -22,20 +20,14 @@ public class Besos {
             totalSum = getNumsSum(String.valueOf(n));
             people++;
 
-            if (totalSum >= 63) {
-                n = 0;
-            }
-
+            if (totalSum >= 63) n = 0;
         }
 
         fillList(listNumbers, n);
 
-        for (Integer listNumber : listNumbers) {
-            response.append(listNumber);
-        }
+        for (Integer number : listNumbers) response.append(number);
 
         pw.println(people + " " + response);
-
         pw.close();
     }
 
@@ -48,9 +40,7 @@ public class Besos {
             list.addLast(cInt);
         }
 
-        while (list.size() < 7) {
-            list.addFirst(0);
-        }
+        while (list.size() < 7) list.addFirst(0);
     }
 
     private static int getNumsSum(String n) {
